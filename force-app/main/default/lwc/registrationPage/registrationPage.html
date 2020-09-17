@@ -1,0 +1,49 @@
+<template>
+    <lightning-card title="REGISTER HERE" >
+
+        <div class="slds-text-align_center">
+            <p>Already registered? </p>
+            <lightning-button variant="brand-outline" label="Log in" onclick={handleLoginClick} 
+                class="slds-m-left_x-small"></lightning-button>
+        </div>
+
+        <!--div class="slds-p-around_small"--> 
+            <div class="slds-var-p-around_xx-large">
+            <h2>Please fill in all fields</h2>
+            <p>First Name : {firstNameValue}</p>
+            <p>Last Name : {lastNameValue}</p>
+            <p>Email : {emailValue}</p>
+            <p>Phone : {phoneValue}</p>
+            <p>Street : {streetValue}</p>
+            <p>checkBox : {checkBoxFieldValue}</p>
+            </br>
+
+
+            <lightning-input label="First Name" name="FirstName" type="text" placeholder="John" required onchange={handleChange}></lightning-input>
+            <lightning-input label="Last Name" name="LastName" type="text" placeholder="Doe" required onchange={handleChange}></lightning-input>
+            <lightning-input label="Email Adress" name="Email" type="email" placeholder="jonedoe@gmail.com" required onchange={handleChange}></lightning-input>
+            <lightning-input label="Phone" name="Phone"  type="tel" placeholder="+375113522525" required onchange={handleChange}
+                field-level-help="Please give us a mobile number we can contact you on if we need to discuss your online account"></lightning-input>
+            <lightning-input label="Street" name="Street" placeholder="Lenina St. 1-12" required onchange={handleChange}></lightning-input>
+            <lightning-input label="City" name="City" placeholder="Minsk" required onchange={handleChange}></lightning-input>
+            <lightning-input label="Login" name="Login" placeholder="jonedoe" required onchange={handleChange}></lightning-input>
+            <lightning-input label="Password" name="Password" value="pre-filled password" required onchange={handleChange}
+                minlength="6" maxlength="15" type="password"
+                field-level-help="Your password needs at least 6-15 characters,
+                1 upper case latter, 1 lower case latter, 1 number, no spaces, and 
+                can`t be the same as your email adress"></lightning-input>
+                <div class="slds-p-around_small slds-p-top_large"> 
+                    <lightning-input type="checkbox" label="I'm not a robot" required onchange={handleCheckBoxChange}></lightning-input>
+                        </br>
+                    <lightning-input type="checkbox" label="I like Salesforce" ></lightning-input>
+                </div>
+            
+            <lightning-button class="slds-p-top_large"
+                label="Register"
+                variant="brand"
+                onclick={createContact}
+        ></lightning-button>
+        </div>
+    </lightning-card>
+    
+</template>

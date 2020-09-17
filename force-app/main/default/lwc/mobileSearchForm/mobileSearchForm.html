@@ -1,0 +1,27 @@
+<template>
+  <lightning-card>
+    <lightning-layout horizontal-align="center" vertical-align="end">
+      <lightning-layout-item class="slds-align-middle" padding="horizontal-medium">
+      </lightning-layout-item>
+      <lightning-layout-item class="slds-align-middle" padding="horizontal-medium">
+        <lightning-combobox label="Sorting by " value={selectedBySort} placeholder="Sort by ..."
+          options={sortingOptions} onchange={handleSortingOptionChange} class="slds-align-middle">
+        </lightning-combobox>
+      </lightning-layout-item>
+      <lightning-layout-item class="slds-align-middle" padding="horizontal-medium">
+        <lightning-input label="Search Record" value={searchKey} type="search" onchange={handleChange}
+          placeholder="Search by name">
+        </lightning-input>
+      </lightning-layout-item>
+      <lightning-layout-item class="slds-align-middle" padding="horizontal-medium">
+        <lightning-input label="Enter the maximum price" value={maxPrice} type="number" onchange={handleMaxPriceChange}
+          placeholder="Maximum price...">
+        </lightning-input>
+      </lightning-layout-item>
+      <lightning-checkbox-group name="Brand" label="Brand" options={brandOptions} value={selectedBrand}
+        onchange={handleBrandChange}></lightning-checkbox-group>
+      <lightning-checkbox-group name="Operating System" label="Operating System" options={osOptions} value={selectedOS}
+        onchange={handleOSChange}></lightning-checkbox-group>
+    </lightning-layout>
+  </lightning-card>
+</template>

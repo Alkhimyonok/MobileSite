@@ -1,0 +1,142 @@
+<template>
+  <c-header user-id={userId} user-name={userName}></c-header>
+  <lightning-card title="Personal office" icon-name="standard:avatar">
+    <lightning-record-edit-form record-id={userId} object-api-name="Contact">
+      <lightning-messages> </lightning-messages>
+      <lightning-input-field field-name="FirstName"> </lightning-input-field>
+      <lightning-input-field field-name="LastName"> </lightning-input-field>
+      <lightning-input-field field-name="Phone"> </lightning-input-field>
+      <lightning-input-field field-name="Email"> </lightning-input-field>
+      <lightning-output-field field-name="Personal_discont__c">
+      </lightning-output-field>
+      <lightning-button
+        class="slds-m-top_small"
+        variant="brand"
+        type="submit"
+        name="update"
+        label="Update"
+      >
+      </lightning-button>
+    </lightning-record-edit-form>
+    <div class="slds-button-group" role="group">
+      <lightning-button
+        class="slds-m-top_small"
+        variant="neutral"
+        type="submit"
+        label={labelOfOrderButton}
+        onclick={handleViewOrders}
+      >
+      </lightning-button>
+      <lightning-button
+        class="slds-m-top_small"
+        variant="neutral"
+        type="submit"
+        label={labelOfCaseButton}
+        onclick={handleViewCases}
+      >
+      </lightning-button>
+      <lightning-button
+        class="slds-m-top_small"
+        variant="neutral"
+        type="submit"
+        label={labelOfAddressesButton}
+        onclick={handleViewAddresses}
+      >
+      </lightning-button>
+    </div>
+    <template if:true={isHideOrders}>
+      <lightning-card title="Orders" icon-name="standard:orders">
+        <template if:true={showTable}>
+          <c-paginator-for-table
+            records={opps}
+            total-records={opps.length}
+            show-search-box="true"
+            onpaginatorchange={handlePaginatorChange}
+          >
+          </c-paginator-for-table>
+          <lightning-datatable
+            key-field="Id"
+            data={recordsToDisplay}
+            columns={columnsForOrders}
+            hide-checkbox-column
+            onrowaction={navigateToOrderRecord}
+            show-row-number-column
+            row-number-offset={rowNumberOffset}
+          >
+          </lightning-datatable>
+        </template>
+      </lightning-card>
+    </template>
+    <template if:true={isHideCases}>
+      <lightning-card title="Cases" icon-name="standard:case">
+        <template if:true={showCaseTable}>
+          <c-paginator-for-table
+            records={cases}
+            total-records={cases.length}
+            show-search-box="true"
+            onpaginatorchange={handlePaginatorChange2}
+          >
+          </c-paginator-for-table>
+          <lightning-datatable
+            key-field="Id"
+            data={recordsToDisplay2}
+            columns={columnsForCases}
+            hide-checkbox-column="false"
+            onrowaction={navigateToCaseRecord}
+            show-row-number-column
+            row-number-offset={rowNumberOffset2}
+          >
+          </lightning-datatable>
+        </template>
+      </lightning-card>
+    </template>
+    <template if:true={isHideAddresses}>
+      <lightning-card title="My addresses" icon-name="standard:home">
+        <c-add-new-address
+          contact-id={contactId}
+          onrefresh={refreshAddresses}
+        ></c-add-new-address>
+        <template if:true={addresses.data}>
+          <lightning-datatable
+            key-field="Id"
+            data={addresses.data}
+            columns={columnsForAdreses}
+            hide-checkbox-column="false"
+            onsave={handleSave}
+            onrowaction={actionWithAddressRecord}
+            draft-values={draftValues}
+          >
+          </lightning-datatable>
+        </template>
+        <template if:true={addresses.error}></template>
+      </lightning-card>
+    </template>
+    <div class="slds-theme_default">
+      <template if:true={isOrderModalOpen}>
+        <c-view-order-info
+          order-id={orderId}
+          onclose={closeOrderModal}
+        ></c-view-order-info>
+      </template>
+    </div>
+    <div class="slds-theme_default">
+      <template if:true={isCaseModalOpen}>
+        <c-create-new-case
+          contact-id={contactId}
+          order-id={orderId}
+          onclose={closeCaseModal}
+          onrefresh={refreshCases}
+        ></c-create-new-case>
+      </template>
+    </div>
+    <div class="slds-theme_default">
+      <template if:true={isCaseInfoModalOpen}>
+        <c-view-case-info
+          case-id={caseId}
+          onclose={closeCaseInfoModal}
+          onopenorder={openOrderModal}
+        ></c-view-case-info>
+      </template>
+    </div>
+  </lightning-card>
+</template>

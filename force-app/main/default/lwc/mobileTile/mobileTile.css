@@ -1,0 +1,19 @@
+.tile {
+  width: 50%;
+  height: 220px;
+  background-color: powderblue;
+  padding: 1px !important;
+  background-position: center;
+  background-size: cover;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+.selected {
+  border: 3px solid rgb(0, 95, 178);
+  border-radius: 5px;
+}
+.tile-wrapper {
+  cursor: pointer;
+  padding: 5px;
+}

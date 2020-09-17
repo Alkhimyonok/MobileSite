@@ -1,0 +1,94 @@
+<template>
+  <lightning-card title="New order" icon-name="custom:custom28">
+    orderId: {orderId} contactId: {contactId}
+    <lightning-record-form
+      record-id={orderId}
+      object-api-name="Custom_Order__c"
+      fields={fieldsOfOrder}
+      columns="1"
+      mode="readonly"
+    >
+    </lightning-record-form>
+    <c-show-positions-in-order order-id={orderId}></c-show-positions-in-order>
+    <lightning-card title="Recipient" icon-name="standard:avatar">
+      <lightning-record-form
+        record-id={contactId}
+        object-api-name="Contact"
+        fields={fields}
+        columns="1"
+        mode="View"
+      >
+      </lightning-record-form>
+    </lightning-card>
+    <lightning-input
+      data-id="deliveryCheckbox"
+      label="delivery"
+      class="slds-p-left_xx-large"
+      type="checkbox"
+      onchange={handleChange}
+    >
+    </lightning-input>
+    <template if:true={isHideDeliveryDate}>
+      <lightning-input
+        data-id="deliveryDate"
+        type="date"
+        label="Select delivery date"
+        value={date}
+        onchange={handleChange}
+      ></lightning-input>
+      <lightning-combobox
+        data-id="address"
+        name="progress"
+        label="Address"
+        value={selectedAddressId}
+        placeholder="SELECT ONE"
+        options={deliveryAddressesOptions}
+        onchange={handleChange}
+      >
+      </lightning-combobox>
+      <c-add-new-address
+        contact-id={contactId}
+        onrefresh={refresh}
+      ></c-add-new-address>
+    </template>
+    <lightning-radio-group
+      data-id="typeOfPayment"
+      name="radioGroup"
+      label="Type of payment"
+      options={typeOfPaymentOptions.data}
+      value={typeOfPayment}
+      type="radio"
+      onchange={handleChange}
+    ></lightning-radio-group>
+    <lightning-input
+      data-id="description"
+      type="text"
+      label="Description"
+      value={description}
+      onchange={handleChange}
+    ></lightning-input>
+    <div class="slds-button-group" role="group">
+      <lightning-button
+        class="slds-m-top_small"
+        variant="neutral"
+        type="submit"
+        label="Cancel order"
+        onclick={handleCancelOrder}
+      >
+      </lightning-button>
+      <lightning-button
+        class="slds-m-top_small"
+        variant="brand"
+        type="submit"
+        label="Order"
+        onclick={handleSubmitForOrder}
+      >
+      </lightning-button>
+    </div>
+  </lightning-card>
+  <div class="slds-theme_default">
+    <template if:true={isCongratulationModalOpen}>
+      <c-congratulation-page contact-id={contactId}></c-congratulation-page>
+    </template>
+  </div>
+</template>

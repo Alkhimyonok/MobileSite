@@ -1,0 +1,19 @@
+<template>
+    <template if:true={mobiles.data}>
+        <div class="slds-scrollable_y">
+            <lightning-card>
+                <lightning-layout horizontal-align="center" multiple-rows="true">
+                    <template for:each={mobiles.data} for:item='mobile'>
+                        <lightning-layout-item flexibility="auto" key={mobile.Id} padding="around-small" size="12" small-device-size="6"
+                            medium-device-size="4" large-device-size="3">
+                            <c-mobile-tile mobile={mobile} onmobileselect={openMobileDetailPage}>
+                            </c-mobile-tile>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </lightning-card>
+        </div>
+        <c-paginator onprevious={previousHandler2} onnext={nextHandler2} onselected={changeHandler2}
+            onfirstpage={firstpagehandler} onlastpage={lastpagehandler}></c-paginator>
+    </template>
+</template>

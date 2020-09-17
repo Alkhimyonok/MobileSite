@@ -1,0 +1,106 @@
+<template>
+
+    <template if:true={error}>
+      <p class="slds-text-color_error">{error}</p>
+    </template>
+    <div class="slds-grid slds-border_top slds-border_bottom slds-border_left slds-border_right">
+      <div class="slds-col slds-size_3-of-12 slds-border_right chatroom__sidebar">
+        <template if:true={displayChatUserList}>
+          <div class="slds-text-title_caps">In Chatroom</div>
+          <ul>
+            <template for:each={wiredChatUsers.data} for:item="user">
+              <li key={user.Id}>
+                <div class="slds-grid">
+                  <div class="slds-col slds-size_2-of-12">
+                    <img src={user.MediumPhotoUrl__c}
+                         class="chatroom__avatar chatroom__avatar--small" />
+                  </div>
+                  <div class="slds-col slds-size_10-of-12 chatroom__content chatroom__usernames">
+                    <p class="chatroom__username">{user.Name}</p>
+                  </div>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </template>
+      </div>
+      <div class="slds-col slds-size_9-of-12">
+        <div class="chatroom__container">
+
+          <div class="chatroom__messages">
+
+            <template if:true={isTyping}>
+              <div class="chatroom__typing-wrap">
+                <div class="chatroom__typing">
+                  <div class="chatroom__typing-line"></div>
+                  <div class="chatroom__typing-line"></div>
+                  <div class="chatroom__typing-line"></div>
+                </div>
+              </div>
+            </template>
+  
+            <ul>
+              <template if:true={isChatActive}
+                        for:each={wiredMessages.data}
+                        for:item="message">
+                <li key={message.Id}>
+                  <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-12">
+                      <template if:true={message.Contact__r.MediumPhotoUrl__c}>
+                        <img class="chatroom__avatar"
+                             src={message.Contact__r.MediumPhotoUrl__c} />
+                      </template>
+                      <template if:false={message.Contact__r.MediumPhotoUrl__c}>
+                        <div class="chatroom__avatar">SF</div>
+                      </template>
+                    </div>
+                    <div class="slds-col slds-size_11-of-12 chatroom__content">
+                      <p class="chatroom__username">{message.Contact__r.Name} 
+                        <span class="chatroom__message-time ">{message.CreatedDate}</span>
+                      </p>
+                      <p>{message.Content__c}</p>
+                    </div>
+                  </div>
+                </li>
+              </template>
+            </ul>
+
+            <template if:false={isChatActive}>
+              <lightning-button class="chatroom__enter-button"
+                                label="Enter Chat"
+                                title="Enter Chat"
+                                onclick={handleEnterChat}>
+              </lightning-button>
+            </template>
+
+          </div>
+        </div>
+        <form class="send-message-form slds-border_top">
+          <input type="text"
+                 class="message-input"
+                 placeholder={inputPlaceholderText}
+                 disabled={isInputDisabled}>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="slds-grid slds-wrap">
+      <div class="slds-col slds-size_1-of-1">
+          <p class="slds-text-body_small slds-float_right">Connected to the websocket server {timeString}</p>
+      </div>
+    </div>
+
+    <template if:true={isChatActive}>
+      <div>
+        <lightning-button label="Leave Chat"
+                          title="Leave Chat"
+                          onclick={handleLeaveChat}>
+        </lightning-button>
+      </div>
+    </template>
+
+    <template if:true={message}>
+      <p class="slds-text-color_success">{message}</p>
+    </template>
+</template>

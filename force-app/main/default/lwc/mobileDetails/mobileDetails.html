@@ -1,0 +1,54 @@
+<template>
+	<c-header user-id={userId}></c-header>
+	<template if:true={refresh}>
+		<template if:true={wiredRecord.data}>
+			<lightning-tabset>
+				<lightning-tab label='Details' value="details">
+					<lightning-card title={mobileName} icon-name="utility:call">
+						<div class="slds-m-right_small">
+							<img src={backgroundStyle}>
+						</div>
+						<lightning-record-view-form record-id={mobileId} object-api-name="Product2" density="compact">
+							<lightning-output-field field-name="Price__c"></lightning-output-field>
+							<lightning-output-field field-name="Description"></lightning-output-field>
+							<lightning-output-field field-name="Brand__c"></lightning-output-field>
+							<lightning-output-field field-name="Operating_System__c"></lightning-output-field>
+							<lightning-output-field field-name="Screen_Size__c">''</lightning-output-field>
+							<lightning-output-field field-name="Screen_Resolution__c"></lightning-output-field>
+							<lightning-output-field field-name="RAM__c"> GB</lightning-output-field>
+							<lightning-output-field field-name="Flash_Memory__c"> GB</lightning-output-field>
+							<lightning-output-field field-name="Rating__c">
+								<c-five-star-rating value={mobileRating} read-only='true'></c-five-star-rating>
+							</lightning-output-field>
+						</lightning-record-view-form>
+						<template if:true={userId}>
+							<div class="slds-clearfix">
+								<lightning-input class="slds-m-right_large slds-float_right slds-text-title_bold" type="number" name="quantity" value={quantity}
+									onchange={handleQuantityChange} placeholder="type the quantity of items..."
+									label="Enter a quantity" max={totalQuantityValue}>
+								</lightning-input>
+							</div>
+							<br>
+							<div class="slds-clearfix">
+								<lightning-button class="slds-m-right_medium slds-float_right slds-text-title_bold" variant="brand-outline" type="submit"
+									label='Add to basket' onclick={handleProductToBasket}>
+								</lightning-button>
+								<lightning-button class="slds-m-right_medium slds-float_right slds-text-title_bold" variant="brand" type="submit"
+									label=' Buy quickly ' onclick={handleProductToOrder}></lightning-button>
+							</div>
+						</template>
+					</lightning-card>
+				</lightning-tab>
+				<lightning-tab label={reviewsLabel} value="reviews">
+					<c-mobile-review-list record-id={mobileId}></c-mobile-review-list>
+				</lightning-tab>
+				<template if:true={userId}>
+					<lightning-tab label='Add review' value="add-review">
+						<c-add-review-form record-id={mobileId} user-id={userId} oncreatereview={handleReviewCreated}>
+						</c-add-review-form>
+					</lightning-tab>
+				</template>
+			</lightning-tabset>
+		</template>
+	</template>
+</template>

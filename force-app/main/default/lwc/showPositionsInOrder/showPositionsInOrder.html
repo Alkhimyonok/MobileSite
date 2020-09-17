@@ -1,0 +1,22 @@
+<template>
+  <lightning-input
+    data-id="positions"
+    label={labelOfPositionsButton}
+    class="slds-p-left_xx-large"
+    type="checkbox"
+    onchange={handleChange}
+  >
+  </lightning-input>
+  <template if:true={isHidePositionsInOrder}>
+    <template if:true={orderItems}>
+      <c-salesforce-codex-data-table
+        key-field="Id"
+        data={orderItems}
+        columns={columns}
+        hide-checkbox-column="false"
+      >
+      </c-salesforce-codex-data-table>
+    </template>
+    <template if:true={orderItems}></template>
+  </template>
+</template>

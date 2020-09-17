@@ -1,0 +1,42 @@
+<template>
+    <template if:false={reviewsToShow}>
+        <div class="slds-align_absolute-center">No reviews yet.</div>
+    </template>
+    <template if:true={reviewsToShow}>
+        <div class="slds-feed reviews-style slds-is-relative slds-scrollable_y">
+            <lightning-spinner if:true={isLoading} variant="brand" size="small" alternative-text="Loading">
+            </lightning-spinner>
+            <ul class="slds-feed__list">
+                <template for:each={mobileReviews} for:item="mobileReview">
+                    <li class="slds-feed__item" key={mobileReview.Id}>
+                        <article class="slds-post">
+                            <header class="slds-post__header slds-media">
+                                <div class="slds-media__body">
+                                    <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                        <p>
+                                            <a title={mobileReview.Contact__r.Name}
+                                                data-record-id={mobileReview.Contact__c}
+                                                onclick={navigateToRecord}>{mobileReview.Contact__r.Name}</a>
+                                        </p>
+                                    </div>
+                                    <p class="slds-text-body_small">
+                                        <lightning-formatted-date-time value={mobileReview.CreatedDate}>
+                                        </lightning-formatted-date-time>
+                                    </p>
+                                </div>
+                            </header>
+                            <div class="slds-text-longform">
+                                <p class="slds-text-title_caps">
+                                    {mobileReview.Name}
+                                </p>
+                                <lightning-formatted-rich-text value={mobileReview.Comment__c}>
+                                </lightning-formatted-rich-text>
+                            </div>
+                            <c-five-star-rating value={mobileReview.Rating__c} read-only="true"></c-five-star-rating>
+                        </article>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </template>
+</template>

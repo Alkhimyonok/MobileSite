@@ -1,0 +1,37 @@
+<template>
+  userId: {userId}
+  <lightning-tabset>
+    <lightning-tab
+      data-id="home"
+      label="Home Page"
+      value="Home Page"
+      onactive={tabselect}
+    >
+      <template if:true={userId}
+        ><c-home-page user-id={userId}></c-home-page>
+      </template>
+      <template if:false={userId}
+        ><c-home-page-for-guest></c-home-page-for-guest>
+      </template>
+    </lightning-tab>
+    <!-- <lightning-tab label="Catalog" value="Catalog"> </lightning-tab> -->
+    <lightning-tab
+      data-id="office"
+      label="Personal Office"
+      value="Personal Office"
+      onactive={tabselect}
+    >
+      <!-- <c-personal-office contact-id={userId}></c-personal-office> -->
+    </lightning-tab>
+    <lightning-tab label={label}>
+      <lightning-tabset>
+        <lightning-tab label="Registration" value="Registration">
+          <c-registration-page></c-registration-page
+        ></lightning-tab>
+        <lightning-tab label="Login" value="Login">
+          <c-authorization-page></c-authorization-page>
+        </lightning-tab>
+      </lightning-tabset>
+    </lightning-tab>
+  </lightning-tabset>
+</template>

@@ -1,0 +1,48 @@
+<template>
+  <lightning-button
+    class="slds-m-top_small"
+    variant="neutral"
+    type="submit"
+    label={labelNewAddressButton}
+    onclick={handleAddNewAddress}
+  >
+  </lightning-button>
+  <template if:true={isHideNewAddressButton}>
+    <lightning-record-edit-form
+      data-id="address"
+      object-api-name="DeliveryAdress__c"
+      onsuccess={handleSuccess}
+      onsubmit={handleSubmit}
+    >
+      <lightning-messages> </lightning-messages>
+      <lightning-input-field data-id="addressInput" field-name="Country__c">
+      </lightning-input-field>
+      <lightning-input-field data-id="addressInput" field-name="State__c">
+      </lightning-input-field>
+      <lightning-input-field data-id="addressInput" field-name="PostalCode__c">
+      </lightning-input-field>
+      <lightning-input-field data-id="addressInput" field-name="City__c">
+      </lightning-input-field>
+      <lightning-input-field data-id="addressInput" field-name="Street__c">
+      </lightning-input-field>
+      <div class="slds-button-group" role="group">
+        <lightning-button
+          class="slds-m-top_small"
+          variant="neutral"
+          name="Cancel"
+          label="Cancel"
+          onclick={handleReset}
+        >
+        </lightning-button>
+        <lightning-button
+          class="slds-m-top_small"
+          variant="brand"
+          type="submit"
+          name="Save"
+          label="Save"
+        >
+        </lightning-button>
+      </div>
+    </lightning-record-edit-form>
+  </template>
+</template>

@@ -1,0 +1,36 @@
+<template>
+  <c-header user-id={userId} user-name={userName}></c-header>
+  <lightning-card title="Basket">
+    <div class="slds-m-around_small">
+      <p>{now}</p>
+      <p>{userId}</p>
+      <template if:true={baskets}>
+        <template for:each={baskets} for:item="basket">
+          <p key={basket.Id}>Basket number: {basket.Name}</p>
+          <c-item-basket
+            key={basket.Id}
+            basket-id={basket}
+            quantity-item={basket.Quantity__c}
+            checkbox-value={basket.ProductStatus__c}
+            onbutton={handleOrderButton}
+            ondelete={handleDeleteButton}
+          ></c-item-basket>
+        </template>
+      </template>
+    </div>
+    <div class="demo-only" style="padding: 0.5rem; background: #4688ec">
+      <div class="slds-text-color_inverse">
+        <strong>Don`t leave the basket, order your phone(s)!</strong>
+      </div>
+    </div>
+
+    <div class="slds-p-around_medium">
+      <lightning-button
+        variant="brand"
+        label="Order"
+        disabled={disabledCondition}
+        onclick={handleOrderClick}
+      ></lightning-button>
+    </div>
+  </lightning-card>
+</template>

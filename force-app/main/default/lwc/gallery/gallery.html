@@ -1,0 +1,22 @@
+<template>
+    <c-header user-id={userId}></c-header>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="12">
+            <lightning-card title="Gallery">
+                <p class="slds-var-p-horizontal_small">
+                    <c-mobile-search-form onsearchbrand={searchMobiles} onsort={sortMobiles}
+                        onchangekey={handleChangeKey} onmaxprice={handleMaxPrice} onchangeos={handleChangeOS}>
+                    </c-mobile-search-form>
+                </p>
+            </lightning-card>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" class="slds-p-top_small slds-is-relative">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" variant="brand">
+                </lightning-spinner>
+            </template>
+            <c-list-mobiles user-id={userId} onloading={handleLoading} ondoneloading={handleDoneLoading}>
+            </c-list-mobiles>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

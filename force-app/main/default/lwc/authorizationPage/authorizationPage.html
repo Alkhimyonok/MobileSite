@@ -1,0 +1,40 @@
+<template>
+  <div class="container">
+    <!-- <div class="headerPanel">
+            <lightning-button label="Home"
+                              onclick={navigateToHome}>
+            </lightning-button>
+            <lightning-button label="About"
+                              onclick={navigateToAbout}>
+            </lightning-button>
+        </div> -->
+    <div class="inputPanel">
+      <div class="inputLogin">
+        <lightning-input label="Login" onchange={handleChange}>
+        </lightning-input>
+      </div>
+      <div class="inputPassword">
+        <lightning-input
+          label="Password"
+          type="password"
+          onchange={handleChange}
+        >
+        </lightning-input>
+      </div>
+      <div class="blockButton">
+        <lightning-button
+          class="button"
+          label="Forgot"
+          onclick={navigateToForgotPassword}
+        >
+        </lightning-button>
+        <!-- <lightning-button class="button"
+                                  label="Registration"
+                                  onclick={navigateToRegistrationUser}>
+                </lightning-button> -->
+        <lightning-button class="button" label="Login" onclick={submitLogin}>
+        </lightning-button>
+      </div>
+    </div>
+  </div>
+</template>

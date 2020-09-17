@@ -1,0 +1,117 @@
+<template>
+  <!-- <div class="headerButton">
+    <lightning-button
+      label="Catalog"
+      class="button"
+      onclick={navigateToCatalog}
+    >
+    </lightning-button>
+    <lightning-button label="About" class="button" onclick={navigateToAbout}>
+    </lightning-button>
+    <lightning-button label="Bascet" class="button" onclick={navigateToBascet}>
+    </lightning-button>
+    <lightning-button
+      label="Personal Office"
+      class="button"
+      onclick={navigateToPersonalOffice}
+    >
+    </lightning-button>
+    <lightning-button label="Logout" class="button" onclick={logout}>
+    </lightning-button>
+  </div> -->
+  <c-header user-id={userId} user-name={userName}></c-header>
+  <div class="container">
+    <h1>Hello, {userName}! userId: {userId}</h1>
+    <div class="">
+      <div class="slds-size_4-of-4">
+        <div class="slds-box slds-box_x-small slds-text-align_center">
+          For a more detailed description, click on the photo
+          <lightning-carousel>
+            <lightning-carousel-image
+              src="https://gizchina.it/wp-content/uploads/2020/06/Xiaomi-mi-10-pro.jpg"
+              header="First Card"
+              description="First card description."
+              alternative-text="First card accessible description."
+              href="https://lwcphoneshop-dev-ed.lightning.force.com/lightning/n/Autorization_Page"
+            >
+            </lightning-carousel-image>
+            <lightning-carousel-image
+              src="https://www.notebookcheck-ru.com/fileadmin/Notebooks/News/_nc3/Mi_10_concept.png"
+              header="Second Card"
+              description="Second card description."
+              alternative-text="Second card accessible description."
+              href="https://www.salesforce.com"
+            >
+            </lightning-carousel-image>
+            <lightning-carousel-image
+              src="https://mobistore.by/files/uploads/70Mai_Mini_Dash_Cam/mi-10-pro-design-min.jpg"
+              header="Third Card"
+              description="Third card description."
+              alternative-text="Third card accessible description."
+              href="https://www.salesforce.com"
+            >
+            </lightning-carousel-image>
+          </lightning-carousel>
+        </div>
+      </div>
+    </div>
+
+    <div class="slds-theme_default">
+      <div class="slds-float_right">
+        <lightning-button
+          label="Open Chat"
+          variant="brand"
+          onclick={openShat}
+          slot="actions"
+        >
+        </lightning-button>
+      </div>
+      <template if:true={open}>
+        <div class="popupBlock" style="height: 640px">
+          <section
+            role="dialog"
+            tabindex="-1"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open"
+          >
+            <div class="slds-modal__container slds-float_right">
+              <header class="slds-modal__header">
+                <button
+                  class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                  title="Close"
+                  onclick={closeChat}
+                >
+                  <lightning-icon
+                    icon-name="utility:close"
+                    alternative-text="close"
+                    variant="inverse"
+                    size="small"
+                  >
+                  </lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+                </button>
+              </header>
+              <c-websocket-chat item={contactId}></c-websocket-chat>
+            </div>
+          </section>
+
+          <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+      </template>
+    </div>
+    <div class="workingInfo">
+      <div class="titleInfo">Our address:</div>
+      <div class="text">Brest, Masherova street, 175</div>
+      <div class="titleInfo">Our phone:</div>
+      <div class="text">(29)755 - 75 - 75</div>
+      <div class="titleInfo">We work:</div>
+      <div class="text">10.00 - 19.00</div>
+      <div class="text">Every day!</div>
+    </div>
+    <div class="bottomTitle">
+      ALWAYS GLAD TO SEE AND ALWAYS WAITING FOR YOU!
+    </div>
+  </div>
+</template>
